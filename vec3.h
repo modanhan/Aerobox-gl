@@ -6,14 +6,4 @@ class vec3 {
 public:
 	T x, y, z;
 };
-template<>
-class vec3<float> {
-public:
-	float x, y, z;
-};
-template<>
-class vec3<int> {
-public:
-	int x, y, z;
-};
 }
