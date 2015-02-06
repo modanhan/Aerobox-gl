@@ -1,4 +1,5 @@
 #pragma once
+
 namespace aerobox {
 template<class T>
 class vec3 {
@@ -8,11 +9,11 @@ public:
 template<>
 class vec3<float> {
 public:
-	float x = 0, y = 0, z = 0;
+	float x, y, z;
 };
 template<>
 class vec3<int> {
 public:
-	int x = 0, y = 0, z = 0;
+	int x, y, z;
 };
 }
