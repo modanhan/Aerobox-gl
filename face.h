@@ -3,6 +3,6 @@
 namespace aerobox {
 class face {
 public:
-	vec3<int> vertex, normal;
+	vec3<int> vertex, normal, texcoord;
 };
 }
