@@ -242,12 +242,14 @@ void setupMatrices(float position_x,float position_y,float position_z,float look
 }
 
 
-// This update only change the position of the light.
-//int elapsedTimeCounter = 0;
+
 void update(void)
 {
 	lightloc[0] = light_mvnt * cos(glutGet(GLUT_ELAPSED_TIME)/1000.0);
 	lightloc[2] = light_mvnt * sin(glutGet(GLUT_ELAPSED_TIME)/1000.0);
+	GLfloat light_position[] = { lightloc[0], lightloc[1], lightloc[2], 0.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
 }
 
 
@@ -286,8 +288,6 @@ void setTextureMatrix(void)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-// During translation, we also have to maintain the GL_TEXTURE8, used in the shadow shader
-// to determine if a vertex is in the shadow.
 void startTranslate(float x,float y,float z)
 {
 	glPushMatrix();
@@ -310,16 +310,38 @@ using namespace std;
 aerobox::objfile o("box.obj");
 
 void init() {
-	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+	double specular_mat = 0.5;
+	double diffuse_mat = 0.1;
+	double ambient_mat = 1.0;
+	double specular_light = 1.0;
+	double diffuse_light = 1.0;
+	double ambient_light = 1.0;
+	double ambient_model = 0.2;
+
+	GLfloat mat_specular[] = {specular_mat, specular_mat, specular_mat, 1.0 };
+	GLfloat mat_diffuse[] = { diffuse_mat, diffuse_mat,diffuse_mat, 1.0 };
+	GLfloat mat_ambient[] = { ambient_mat, ambient_mat, ambient_mat, 1.0 };
+	GLfloat light_specular[] = { specular_light, specular_light, specular_light, 1.0 };
+	GLfloat light_diffuse[] = { diffuse_light, diffuse_light, diffuse_light, 1.0 };
+	GLfloat light_ambient[] = { ambient_light, ambient_light, ambient_light, 1.0 };
+
+	GLfloat model_ambient[] = { ambient_model, ambient_model, ambient_model, 1.0 };
+
 	GLfloat mat_shininess[] = { 50.0 };
 	GLfloat light_position[] = { lightloc[0], lightloc[1], lightloc[2], 0.0 };
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glShadeModel (GL_SMOOTH);
 
 	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
 	glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, model_ambient);
 	glEnable (GL_LIGHTING);
 	glEnable (GL_LIGHT0);
 	glEnable (GL_DEPTH_TEST);
@@ -332,10 +354,10 @@ void draw(){
 	glBegin(GL_QUADS);		
 	glColor4f(0.7f,0.7f,0.7f,1);
 	glNormal3f(0,1,0);
-	glVertex3f(10,0,10);
-	glVertex3f(10,0,-10);
-	glVertex3f(-10,0,-10);
-	glVertex3f(-10,0,10);
+	glVertex3f(50,0,50);
+	glVertex3f(50,0,-50);
+	glVertex3f(-50,0,-50);
+	glVertex3f(-50,0,50);
 	glEnd();
 	glFlush();
 }
