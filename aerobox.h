@@ -7,10 +7,10 @@
 
 #include <string>
 #include <vector>
+#include <GL/glut.h>
 
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <GL/glut.h>
 #include "face.h"
 #include "vec3.h"
 #include "vec2.h"
