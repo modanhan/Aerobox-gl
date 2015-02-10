@@ -2,7 +2,7 @@
 namespace aerobox {
 std::vector<bool> keydown(256, 0), keypressed(256, 0), keyreleased(256, 0);
 
-void keyboardPostRedisplayFunc() {
+void keyboardPostRedisplay() {
 	keypressed.assign(256, 0);
 	keyreleased.assign(256, 0);
 }

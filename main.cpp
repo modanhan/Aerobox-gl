@@ -15,25 +15,31 @@ void init(void) {
 }
 
 void display() {
-	glClear (GL_COLOR_BUFFER_BIT);
-	glColor3f(1.0, 1.0, 1.0);
-	glLoadIdentity();
-	gluLookAt(1.0, 5.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-	glScalef(1.0, 2.0, 1.0);
+	glColor4f(1, 1, 1, 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glutWireCube(1.0);
-	glFlush();
-	
-	aerobox::keyboardPostRedisplayFunc();
 
+	for (int i = 0; i < 256; i++) {
+		if (aerobox::keydown[i]) {
+			cout << (char) i;
+		}
+	}
+	cout << "\n";
+
+	aerobox::keyboardPostRedisplay();
 	glutPostRedisplay();
+	glFlush();
 }
 
 void reshape(int w, int h) {
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
-	glFrustum(-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
+	gluPerspective(60, (GLfloat) w / (GLfloat) h, 0.1, 20.0);
 	glMatrixMode (GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(4.0, 3.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	glutPostRedisplay();
 }
 
 int main(int argc, char* argv[]) {
