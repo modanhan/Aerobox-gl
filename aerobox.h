@@ -2,8 +2,8 @@
 
 #ifdef _WIN32
 #include <windows.h>
-#include <gl\gl.h>
-#include <gl\glu.h>
+#include <gl\GL.h>
+#include <gl\GLU.h>
 #include <gl\glut.h>
 #endif
 
