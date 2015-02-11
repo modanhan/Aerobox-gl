@@ -1,11 +1,4 @@
-#include <iostream>
-#include <cstring>
-
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
-
-#include "keyboard.h"
+#include "aerobox.h"
 
 using namespace std;
 
