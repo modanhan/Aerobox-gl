@@ -1,19 +1,28 @@
 #include <vector>
 namespace aerobox {
-std::vector<bool> keydown(256, 0), keypressed(256, 0), keyreleased(256, 0);
+std::vector<bool> kd(256, 0), lkd(256, 0);
+
+bool keydown(int c) {
+	return kd[c];
+}
+
+bool keypressed(int c) {
+	return (!lkd[c]) && kd[c];
+}
+
+bool keyreleased(int c) {
+	return lkd[c] && (!kd[c]);
+}
 
 void keyboardPostRedisplay() {
-	keypressed.assign(256, 0);
-	keyreleased.assign(256, 0);
+	lkd = kd;
 }
 
 void keyboardFunc(unsigned char key, int x, int y) {
-	keypressed[key] = 1;
-	keydown[key] = 1;
+	kd[key] = 1;
 }
 
 void keyboardUpFunc(unsigned char key, int x, int y) {
-	keyreleased[key] = 1;
-	keydown[key] = 0;
+	kd[key] = 0;
 }
 }

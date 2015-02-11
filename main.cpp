@@ -20,11 +20,13 @@ void display() {
 	glutWireCube(1.0);
 
 	for (int i = 0; i < 256; i++) {
-		if (aerobox::keydown[i]) {
-			cout << (char) i;
+		if (aerobox::keypressed(i)) {
+			cout << (char) i << " pressed\n";
+		}
+		if (aerobox::keyreleased(i)) {
+			cout << (char) i << " released\n";
 		}
 	}
-	cout << "\n";
 
 	aerobox::keyboardPostRedisplay();
 	glutPostRedisplay();
