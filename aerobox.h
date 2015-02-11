@@ -7,7 +7,7 @@
 #include <gl\glut.h>
 #endif
 
-#ifdef unix
+#if defined(unix) || defined(__unix__) || defined(__unix)
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
