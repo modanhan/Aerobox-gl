@@ -2,23 +2,48 @@
 
 using namespace std;
 
+int width = 0, height = 0;
+float cx = 4, cy = 3, cz = 1;
+
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glShadeModel (GL_FLAT);
 }
 
 void display() {
-	glColor4f(1, 1, 1, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glutWireCube(1.0);
+	glViewport(0, 0, (GLsizei) width, (GLsizei) height);
+	glMatrixMode (GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(45, (GLfloat) width / (GLfloat) height, 0.1, 20.0);
+	glMatrixMode (GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(cx, cy, cz, cx-4, cy-3, cz-1, 0.0, 1.0, 0.0);
+	glutPostRedisplay();
 
-	for (int i = 0; i < 256; i++) {
-		if (aerobox::keypressed(i)) {
-			cout << (char) i << " pressed\n";
-		}
-		if (aerobox::keyreleased(i)) {
-			cout << (char) i << " released\n";
-		}
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glutWireSphere(.5, 10, 10);
+
+	glColor4f(1, 1, 1, 1);
+	glBegin (GL_LINES);
+	for (int i = -10; i <= 10; i++) {
+		glVertex3f(i, 0, -100);
+		glVertex3f(i, 0, 100);
+		glVertex3f(-100, 0, i);
+		glVertex3f(100, 0, i);
+	}
+	glEnd();
+
+	if (aerobox::keydown('w')) {
+		cx -= .001;
+	}
+	if (aerobox::keydown('a')) {
+		cz += .001;
+	}
+	if (aerobox::keydown('s')) {
+		cx += .001;
+	}
+	if (aerobox::keydown('d')) {
+		cz -= .001;
 	}
 
 	aerobox::keyboardPostRedisplay();
@@ -27,10 +52,12 @@ void display() {
 }
 
 void reshape(int w, int h) {
+	width = w;
+	height = h;
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60, (GLfloat) w / (GLfloat) h, 0.1, 20.0);
+	gluPerspective(45, (GLfloat) w / (GLfloat) h, 0.1, 20.0);
 	glMatrixMode (GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt(4.0, 3.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
@@ -53,5 +80,8 @@ int main(int argc, char* argv[]) {
 
 	glutKeyboardFunc(aerobox::keyboardFunc);
 	glutKeyboardUpFunc(aerobox::keyboardUpFunc);
+
+	glutMouseFunc(aerobox::mousefunc);
+
 	glutMainLoop();
 }

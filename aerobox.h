@@ -22,3 +22,4 @@
 #include <istream>
 
 #include "keyboard.h"
+#include "mouse.h"
