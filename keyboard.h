@@ -1,4 +1,5 @@
-#include <vector>
+#pragma once
+#include "gllibs.h"
 namespace aerobox {
 std::vector<bool> kd(256, 0), lkd(256, 0);
 

@@ -1,9 +1,11 @@
 #include "aerobox.h"
+#include "gllibs.h"
 
 using namespace std;
 
 int width = 0, height = 0;
 glm::vec3 camposition(1,3,4), camlookat(0,0,0);
+aerobox::objfile o("box.obj");
 
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -33,6 +35,8 @@ void display() {
 		glVertex3f(100, 0, i);
 	}
 	glEnd();
+
+	o.render();
 
 	aerobox::keyboardPostRedisplay();
 	glutPostRedisplay();

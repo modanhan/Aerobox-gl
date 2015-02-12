@@ -1,8 +1,8 @@
 #pragma once
-#include "vec3.h"
+#include "gllibs.h"
 namespace aerobox {
 class face {
 public:
-	vec3<int> vertex, normal, texcoord;
+	glm::tvec3<int> vertex, normal, texcoord;
 };
 }

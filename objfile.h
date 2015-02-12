@@ -1,11 +1,14 @@
 #pragma once
 #include <vector>
-#include "aerobox.h"
+
+#include "gllibs.h"
+
+#include "face.h"
 namespace aerobox {
 class objfile {
 public:
-	std::vector<vec3<float> > vertices, normals;
-	std::vector<vec2<float> > texcoords;
+	std::vector<glm::vec3> vertices, normals;
+	std::vector<glm::vec2> texcoords;
 	std::vector<face> faces;
 	objfile(const char*);
 	void render();
