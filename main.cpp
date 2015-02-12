@@ -3,7 +3,7 @@
 using namespace std;
 
 int width = 0, height = 0;
-float cx = 4, cy = 3, cz = 1;
+glm::vec3 camposition(1,3,4), camlookat(0,0,0);
 
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -17,7 +17,8 @@ void display() {
 	gluPerspective(45, (GLfloat) width / (GLfloat) height, 0.1, 20.0);
 	glMatrixMode (GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(cx, cy, cz, cx-4, cy-3, cz-1, 0.0, 1.0, 0.0);
+	gluLookAt(camposition[0], camposition[1], camposition[2],
+			camlookat[0], camlookat[1], camlookat[2], 0.0, 1.0, 0.0);
 	glutPostRedisplay();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -32,19 +33,6 @@ void display() {
 		glVertex3f(100, 0, i);
 	}
 	glEnd();
-
-	if (aerobox::keydown('w')) {
-		cx -= .001;
-	}
-	if (aerobox::keydown('a')) {
-		cz += .001;
-	}
-	if (aerobox::keydown('s')) {
-		cx += .001;
-	}
-	if (aerobox::keydown('d')) {
-		cz -= .001;
-	}
 
 	aerobox::keyboardPostRedisplay();
 	glutPostRedisplay();
