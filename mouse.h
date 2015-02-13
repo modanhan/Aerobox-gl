@@ -1,7 +1,8 @@
 #pragma once
 #include "gllibs.h"
 namespace aerobox {
-void mousefunc(int button, int state, int x, int y) {
-	std::cout << button << "\t" << state << "\t" << x << "\t" << y << "\n";
-}
+extern float gx,gz;
+extern glm::vec3 rayorigin;
+extern glm::vec3 raydir;
+void mousefunc(int, int, int, int);
 }

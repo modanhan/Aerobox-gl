@@ -3,6 +3,6 @@
 namespace aerobox {
 class face {
 public:
-	glm::tvec3<int> vertex, normal, texcoord;
+	glm::detail::tvec3<int> vertex, normal, texcoord;
 };
 }

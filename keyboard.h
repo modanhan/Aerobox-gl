@@ -1,29 +1,20 @@
 #pragma once
+
+#include <vector>
+
 #include "gllibs.h"
+
 namespace aerobox {
-std::vector<bool> kd(256, 0), lkd(256, 0);
 
-bool keydown(int c) {
-	return kd[c];
-}
+bool keydown(int);
 
-bool keypressed(int c) {
-	return (!lkd[c]) && kd[c];
-}
+bool keypressed(int);
 
-bool keyreleased(int c) {
-	return lkd[c] && (!kd[c]);
-}
+bool keyreleased(int);
 
-void keyboardPostRedisplay() {
-	lkd = kd;
-}
+void keyboardPostRedisplay();
 
-void keyboardFunc(unsigned char key, int x, int y) {
-	kd[key] = 1;
-}
+void keyboardFunc(unsigned char, int, int);
 
-void keyboardUpFunc(unsigned char key, int x, int y) {
-	kd[key] = 0;
-}
+void keyboardUpFunc(unsigned char, int, int);
 }

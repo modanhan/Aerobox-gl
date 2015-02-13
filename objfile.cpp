@@ -5,8 +5,6 @@
 #include <fstream>
 #include <istream>
 
-#include "gllibs.h"
-
 #include "objfile.h"
 namespace aerobox{
 	objfile::objfile(const char* file) {
@@ -31,9 +29,9 @@ namespace aerobox{
 			else if (s == "f") {
 				char* c = new char[128];
 				in >> c;
-				glm::tvec3<int> vi;
-				glm::tvec3<int> vti;
-				glm::tvec3<int> vni;
+				glm::detail::tvec3<int> vi;
+				glm::detail::tvec3<int> vti;
+				glm::detail::tvec3<int> vni;
 				sscanf(c, "%d/%d/%d", &vi[0], &vti[0], &vni[0]);
 				in >> c;
 				sscanf(c, "%d/%d/%d", &vi[1], &vti[1], &vni[1]);
